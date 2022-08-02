@@ -38,12 +38,22 @@ const ChartPie = () => {
                 backgroundColor: [
                     "#42A5F5",
                     "#66BB6A",
-                    "#FFA726"
+                    "#FFA726",
+                    "#0CF07A",
+                    "#A418F0",
+                    "#1AF001",
+                    "#C2F00C",
+                    "#F02E18",
                 ],
                 hoverBackgroundColor: [
                     "#64B5F6",
                     "#81C784",
-                    "#FFB74D"
+                    "#FFB74D",
+                    "#0CF07A",
+                    "#A418F0",
+                    "#1AF001",
+                    "#C2F00C",
+                    "#F02E18",
                 ]
             }
         ]
