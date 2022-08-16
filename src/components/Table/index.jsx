@@ -10,10 +10,51 @@ import TableFooter from "./TableFooter";
 const Table = ({ data, rowsPerPage, setCountries }) => {
   const [page, setPage] = useState(1);
   const { slice, range } = useTable(data, page, rowsPerPage);
-  const { handleSubmit, register, reset, getValues, setValue, control, formState: { errors }, } = useForm();
+  const { register, formState: { errors }, } = useForm();
   const [cnpjCpf, setCnpjCpf] = useState('');
   const [fone, setFone] = useState('');
 
+  const initialMinute = 10, initialSeconds = 0;
+  const [minutes, setMinutes] = useState(initialMinute);
+  const [seconds, setSeconds] = useState(initialSeconds);
+
+  React.useEffect(() => {
+    let myInterval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(myInterval)
+        } else {
+          setMinutes(minutes - 1);
+          setSeconds(59);
+        }
+      }
+    }, 1000)
+    return () => {
+      clearInterval(myInterval);
+    };
+
+    
+  });
+
+  const [timer, setTimer] = React.useState(0);
+  const [toggle, setToggle] = React.useState(false);
+
+  React.useEffect(() => {
+    let counter;
+    if (toggle) {
+      counter = setInterval(() => setTimer(timer => timer + 1), 1000);
+    }
+    return () => {
+      clearInterval(counter);
+    };
+  }, [toggle]);
+
+  const handleStart = () => {
+    setToggle(true);
+  };
 
   function filterCompany(e) {
     if (e.target.value === "") {
@@ -123,6 +164,20 @@ const Table = ({ data, rowsPerPage, setCountries }) => {
 
   return (
     <>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {minutes === 0 && seconds === 0
+          ? null
+          : <>
+            <h1> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
+          </>
+        }
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p>Current timer - {timer}</p>
+        <button onClick={handleStart}>Start</button>
+      </div>
+
       <div style={{ margin: "10px" }}>
         {exibirInputFone()}
       </div>
