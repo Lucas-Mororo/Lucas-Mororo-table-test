@@ -35,7 +35,7 @@ Um projetos de testes para todas as novas bibliotecas e funcionalidades que quei
 O projeto foi inicializado com o boilerplate create-react-app, portanto para realizar a instalação das dependências do projeto deve-se empregar o comando yarn:
 
 ````
-$ yarn 
+$ yarn install
 ````
 
 ### Executando o projeto
